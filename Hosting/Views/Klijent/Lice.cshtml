@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Vrsta Lica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string Domena = (string)ViewData["Domena"];
+    int? DomenePaketiId = (int?)ViewData["DomenePaketiId"];
+    string upozorenje = (string)ViewData["upozorenje"];
+    int? sslid = (int?)ViewData["sslid"];
+    int? vpsid = (int?)ViewData["vpsid"];
+    int? did = (int?)ViewData["did"];
+    int? hid = (int?)ViewData["hid"];
+}
+
+<br />
+@{
+    if (@DomenePaketiId != null)//kupovina domene
+    {
+        <a href="/Klijent/FizickoDodaj?Domena=@Domena&DomenePaketiId=@DomenePaketiId" class="btn btn-default">Fizičko lice</a> <label> / </label>
+        <a href="/Klijent/PravnoDodaj?Domena=@Domena&DomenePaketiId=@DomenePaketiId" class="btn btn-default">Pravno lice</a>
+    }
+    if (@sslid != null)//kupovina domene
+    {
+        <a href="/Klijent/FizickoDodaj?Domena=@Domena&sslid=@sslid" class="btn btn-default">Fizičko lice</a> <label> / </label>
+        <a href="/Klijent/PravnoDodaj?Domena=@Domena&sslid=@sslid" class="btn btn-default">Pravno lice</a>
+    }
+    if (@vpsid != null)//kupovina vps
+    {
+        <a href="/Klijent/FizickoDodaj?vpsid=@vpsid" class="btn btn-default">Fizičko lice</a> <label> / </label>
+        <a href="/Klijent/PravnoDodaj?vpsid=@vpsid" class="btn btn-default">Pravno lice</a>
+    }
+    if (@did != null)//kupovina dedicated
+    {
+        <a href="/Klijent/FizickoDodaj?did=@did" class="btn btn-default">Fizičko lice</a> <label> / </label>
+        <a href="/Klijent/PravnoDodaj?did=@did" class="btn btn-default">Pravno lice</a>
+    }
+    if (@hid != null)//kupovina hosting
+    {
+        <a href="/Klijent/FizickoDodaj?hid=@hid&Domena=@Domena" class="btn btn-default">Fizičko lice</a> <label> / </label>
+        <a href="/Klijent/PravnoDodaj?hid=@hid&Domena=@Domena" class="btn btn-default">Pravno lice</a>
+    }
+}
+
+
+<br/><br/>
+<label>Imam kreiran kreiran akaunt:</label><br/>
+<form action="/Klijent/ProvjeraUserPassword">
+    <div style="visibility: @upozorenje">
+        <label>Neispravan username ili password</label>
+    </div>
+    
+    <input type="text" name="Domena" class="form-control" value="@Domena" style="display: none;"/>
+    <input type="text" name="DomenePaketiId" class="form-control" value="@DomenePaketiId" style="display: none;"/>
+    <input type="text" name="sslid" class="form-control" value="@sslid" style="display: none;" />
+    <input type="text" name="vpsid" class="form-control" value="@vpsid" style="display: none;" />
+    <input type="text" name="did" class="form-control" value="@did" style="display: none;" />
+    <input type="text" name="hid" class="form-control" value="@hid" style="display: none;" />
+    <div class="form-group">
+        <label>Username:</label>
+        <input type="text" name="Username" class="form-control" placeholder="Username"/>
+    </div>
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" name="Password" class="form-control" placeholder="Password"/>
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default"/>
+</form>

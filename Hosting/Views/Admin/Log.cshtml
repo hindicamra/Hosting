@@ -1,0 +1,63 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Admin log";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<AdminLog> log = (List<AdminLog>) ViewData["log"];
+    List<Admin> administratori = (List<Admin>) ViewData["administratori"];
+}
+
+<h2>Logovi</h2>
+
+<form action="/Admin/LogPretraga">
+    <div class="form-horizontal">
+        <label>Od datuma:</label>
+        <input type="date" name="Od" class="form-control" />
+    </div>
+    <div class="form-horizontal">
+        <label>Do datuma:</label>
+        <input type="date" name="Do" class="form-control" />
+    </div>
+    <div class="form-horizontal">
+        <label>Admin:</label>
+        <select name="Adm" class="form-control">
+            @foreach (Admin x in administratori)
+            {
+                <option value="@x.Id">@x.Ime @x.Prezime</option>
+            }
+        </select>
+    </div>
+    <div>
+        <br/>
+        <input type="submit" value="Pretraga" class="btn btn-default"/>
+        <br />
+        <br/>
+    </div>
+</form>
+
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Admin:</th>
+    <th>Datum:</th>
+    <th>IP:</th>
+    <th>Poruka:</th>
+    </thead>
+
+    @foreach (AdminLog x in log)
+    {
+        <tr>
+            @if (x.Admin != null)
+            {
+                <td>@x.Admin.Ime @x.Admin.Prezime</td>
+            }
+            else
+            {
+                <td></td>
+            }
+            
+            <td>@x.Datum</td>
+            <td>@x.IP</td>
+            <td>@x.Poruka</td>
+        </tr>
+    }
+</table>

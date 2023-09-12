@@ -1,0 +1,29 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Rack Dodaj";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<Rack> r = (List<Rack>) ViewData["r"];
+}
+
+<br />
+<form action="/rack/RackSnimi">
+    <div class="form-group">
+        <label>Rack:</label>
+        <input type="text" name="Rack" class="form-control" placeholder="Rack" />
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+</form>
+
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Rack:</th>
+    </thead>
+
+    @foreach (Rack x in r)
+    {
+        <tr>
+            <td>@x.Naziv</td>
+        </tr>
+    }
+</table>

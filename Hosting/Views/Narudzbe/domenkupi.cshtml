@@ -1,0 +1,19 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Domena kupi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DomenePaketi d = (DomenePaketi) ViewData["d"];
+}
+
+<br />
+<form action="/Narudzbe/DomenaSnimi">
+    <div class="form-inline">
+        <label>Domen:</label>
+        <input type="text" name="Domena" class="form-control" placeholder="Domena" />
+        <input type="text" name="Domen" class="form-control" value="@d.Domena.Naziv" disabled />
+        <input type="hidden" name="DomenePaketiId" class="form-control" value="@d.Id" hidden="True"/>
+        <input type="submit" value="Snimi" class="btn btn-default" />
+    </div>
+    
+</form>

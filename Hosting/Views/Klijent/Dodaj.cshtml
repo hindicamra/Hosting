@@ -1,0 +1,71 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Novi klijent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Grad> g = (List<Grad>)ViewData["g"];
+
+    string Domena = (string)ViewData["Domena"];
+    int DomenePaketiId = (int)ViewData["DomenePaketiId"];
+}
+
+<br />
+<form action="/Klijent/Snimi">
+    <input type="text" name="Domena" class="form-control" value="@Domena" style="display:none;" />
+    <input type="text" name="DomenePaketiId" class="form-control" value="@DomenePaketiId" style="display:none;" />
+    <div class="form-group">
+        <label>Ime:</label>
+        <input type="text" name="Ime" class="form-control" placeholder="Ime"/>
+    </div>
+    <div class="form-group">
+        <label>Prezime:</label>
+        <input type="text" name="Prezime" class="form-control" placeholder="Prezime"/>
+    </div>
+    <div class="form-group">
+        <label>E-mail:</label>
+        <input type="text" name="Email" class="form-control" placeholder="E-mail" required/>
+    </div>
+    <div class="form-group">
+        <label>Adresa:</label>
+        <input type="text" name="Adresa" class="form-control" placeholder="Adresa"/>
+    </div>
+    <div class="form-group">
+        <label>Telefon:</label>
+        <input type="text" name="Telefon" class="form-control" placeholder="Telefon"/>
+    </div>
+    <div class="form-group">
+        <label>Mobitel:</label>
+        <input type="text" name="Mobitel" class="form-control" placeholder="Mobitel"/>
+    </div>
+    <div class="form-group">
+        <label>Fax:</label>
+        <input type="text" name="Fax" class="form-control" placeholder="Fax"/>
+    </div>
+    <div class="form-group">
+        <label>JMBG:</label>
+        <input type="text" name="JMBG" class="form-control" placeholder="JMBG"/>
+    </div>
+    <div class="form-group">
+        <label>ID Broj:</label>
+        <input type="text" name="IDBroj" class="form-control" placeholder="IDBroj"/>
+    </div>
+    <div class="form-group">
+        <label>PDVBroj:</label>
+        <input type="text" name="PDVBroj" class="form-control" placeholder="PDV Broj"/>
+    </div>
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" name="Password" class="form-control" placeholder="Password" required/>
+    </div>
+    <div class="form-group">
+        <label>Grad:</label>
+        <select id="Grad" name="Grad" class="form-control">
+            @foreach (Grad x in g)
+            {
+                <option value="@x.Id">@x.Naziv</option>
+            }
+        </select>
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default"/>
+
+</form>

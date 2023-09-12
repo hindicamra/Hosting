@@ -1,0 +1,47 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Pregled tiketa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Tiketi t = (Tiketi)ViewData["t"];
+    List<Poruke> p = (List<Poruke>)ViewData["p"];
+}
+
+<form action="/Tiket/snimiA">
+    <br/>
+    <input type="hidden" name="Id" value="@t.Id"/>
+    Naslov: <label><b>@t.Naslov</b></label> - @t.Datum
+
+    <table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+        <thead>
+        <th>Piše:</th>
+        <th>Poruka:</th>
+        <th>Datum:</th>
+        </thead>
+        @foreach (Poruke x in p)
+        {
+            <tr>
+                @if (@x.AdminId != null)
+                {
+                    <td> <div class="glyphicon glyphicon-send"></div> <b>Administrator:</b> @x.Admin.Ime @x.Admin.Prezime</td>
+                }
+                else
+                {
+                    <td> <div class="glyphicon glyphicon-download"></div> @x.Tiketi.Klijenti.Ime @x.Tiketi.Klijenti.Prezime </td>
+                }
+
+                <td>@x.Sadrzaj</td>
+                <td>@x.Datum</td>
+            </tr>
+        }
+    </table>
+    
+    @{var user = Session["admin"] as Admin;}
+    @if (t.AdminId == user.Id)
+    {
+        <label>Odgovor: </label>
+        <textarea name="poruka" class="form-control"></textarea>
+        <br />
+        <input type="submit" value="Snimi" class="btn btn-default" />
+    }
+</form>

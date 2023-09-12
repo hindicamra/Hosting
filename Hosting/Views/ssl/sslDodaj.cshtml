@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "SSL";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+<form action="/ssl/Snimi">
+    <div class="form-group">
+        <label>Paket:</label>
+        <input type="text" name="Paket" class="form-control" placeholder="Paket" />
+    </div>
+    <div class="form-group">
+        <label>Vrsta provjere:</label>
+        <input type="text" name="VrstaProvjere" class="form-control" placeholder="Vrsta provjere" />
+    </div>
+    <div class="form-group">
+        <label>Nivo povjerenja:</label>
+        <input type="text" name="NivoPovjerenja" class="form-control" placeholder="Nivo povjerenja" />
+    </div>
+    <div class="form-group">
+        <label>Zelena traka:</label>
+        <input type="checkbox" name="ZelenaTraka" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Garancija izdavača:</label>
+        <input type="text" name="GarancijaIzdavaca" class="form-control" placeholder="Garancija izdavača" />
+    </div>
+    <div class="form-group">
+        <label>Broj osiguranih poddomena:</label>
+        <input type="text" name="BrojOsiguranihPoddomena" class="form-control" placeholder="Broj osiguranih poddomena" />
+    </div>
+    <div class="form-group">
+        <label>Brzina izdavanja:</label>
+        <input type="text" name="BrzinaIzdavanja" class="form-control" placeholder="Brzina izdavanja" />
+    </div>
+    <div class="form-group">
+        <label>SSL enkripcija:</label>
+        <input type="text" name="SSLEnkripcija" class="form-control" placeholder="SSL enkripcija" />
+    </div>
+    <div class="form-group">
+        <label>Kompaktibilno sa 99% uređaja:</label>
+        <input type="checkbox" name="Kompaktibilno" class="checkbox" />
+    </div>
+    <div class="form-group">
+        <label>Kompaktibilno sa mobilnim uređajima:</label>
+        <input type="checkbox" name="KompaktibilnoMob" class="checkbox" />
+    </div>
+    <div class="form-group">
+        <label>Cijena:</label>
+        <input type="text" name="Cijena" class="form-control" placeholder="Cijena" />
+    </div>
+
+    <input type="submit" value="Snimi" class="btn btn-default" />
+
+</form>

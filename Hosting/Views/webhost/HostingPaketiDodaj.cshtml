@@ -1,0 +1,69 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "HostingPaketiDodaj";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<Serveri> s = (List<Serveri>)ViewData["s"];
+}
+
+<br />
+<form action="/webhost/HostingPaketiSnimi">
+    <div class="form-group">
+        <label>Paket:</label>
+        <input type="text" name="Paket" class="form-control" placeholder="Paket" />
+    </div>
+    <div class="form-group">
+        <label>Prostor:</label>
+        <input type="text" name="Prostor" class="form-control" placeholder="Prostor" />
+    </div>
+    <div class="form-group">
+        <label>Promet:</label>
+        <input type="text" name="Promet" class="form-control" placeholder="Promet" />
+    </div>
+    <div class="form-group">
+        <label>Baza:</label>
+        <input type="text" name="Baza" class="form-control" placeholder="Baza" />
+    </div>
+    <div class="form-group">
+        <label>E-mail adresa:</label>
+        <input type="text" name="EmailAdresa" class="form-control" placeholder="E-mail adresa" />
+    </div>
+    <div class="form-group">
+        <label>Cijena:</label>
+        <input type="text" name="Cijena" class="form-control" placeholder="Cijena" />
+    </div>
+    <div class="form-group">
+        <label>IPV4:</label>
+        <input type="text" name="IPV4" class="form-control" placeholder="IPV4" />
+    </div>
+    <div class="form-group">
+        <label>IPV6:</label>
+        <input type="text" name="IPV6" class="form-control" placeholder="IPV6" />
+    </div>
+    <div class="form-group">
+        <label>Addon domena:</label>
+        <input type="text" name="AddonDomena" class="form-control" placeholder="Addon domena" />
+    </div>
+    <div class="form-group">
+        <label>Parked domena:</label>
+        <input type="text" name="ParkedDomena" class="form-control" placeholder="Parked domena" />
+    </div>
+    <div class="form-group">
+        <label>FTP naloga:</label>
+        <input type="text" name="FTPNalog" class="form-control" placeholder="FTP nalog" />
+    </div>
+    <div class="form-group">
+        <label>Pod domena:</label>
+        <input type="text" name="PodDomena" class="form-control" placeholder="Pod domena" />
+    </div>
+    <div class="form-group">
+        <label>Server:</label>
+        <select id="Server" name="Server" class="form-control">
+            @foreach (Serveri x in s)
+            {
+                <option value="@x.Id">@x.Naziv </option>
+            }
+        </select>
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+</form>

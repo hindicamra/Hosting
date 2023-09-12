@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Novi tiket";
+    Layout = "~/Views/Shared/_LayoutKlijent.cshtml";
+}
+@model DataAccessLayer.Klase.TiketiEditViewModel
+<link href="~/Content/Site.css" rel="stylesheet" />
+<h2>Novi tiket</h2>
+<form action="/Tiket/Kreiraj">
+    <div>
+        <label>Naslov:</label>
+        @Html.TextBoxFor(model=>model.Naslov, new {@class= "form-control" })
+        @Html.ValidationMessageFor(model => model.Naslov)
+
+        @*<input name="naslov" type="text" class="form-control" placeholder="Naslov"/>*@
+</div>
+    <div class="form-horizontal">
+        <label>Poruka:</label>
+        @Html.TextAreaFor(model => model.Poruka, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Poruka)
+
+            @*<textarea name="poruka" class="form-control" rows="3" placeholder="Poruka"></textarea>*@
+</div>
+    <div>
+            @Html.ValidationSummary()
+</div>
+    <br/>
+    <input type="submit" value="Snimi" class="btn btn-default"/>
+</form>

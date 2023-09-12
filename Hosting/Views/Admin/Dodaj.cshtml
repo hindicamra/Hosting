@@ -1,0 +1,40 @@
+﻿@using DataAccessLayer.Klase
+@{
+    Layout = null;
+    List<Grad> g = (List<Grad>)ViewData["g"];
+}
+
+<br />
+<form action="/Admin/Snimi">
+    <div class="form-group">
+        <label>Ime:</label>
+        <input type="text" name="Ime" class="form-control" placeholder="Ime" />
+    </div>
+    <div class="form-group">
+        <label>Prezime:</label>
+        <input type="text" name="Prezime" class="form-control" placeholder="Prezime" />
+    </div>
+    <div class="form-group">
+        <label>Head?:</label>
+        <input type="radio" name="Head" class="radio" />
+    </div>
+    <div class="form-group">
+        <label>E-mail:</label>
+        <input type="text" name="Email" class="form-control" placeholder="E-mail" />
+    </div>
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" name="Password" class="form-control" placeholder="Password" />
+    </div>
+    <div class="form-group">
+        <label>Grad:</label>
+        <select id="Grad" name="Grad" class="form-control">
+            @foreach (Grad x in g)
+            {
+                <option value="@x.Id">@x.Naziv</option>
+            }
+        </select>
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+
+</form>

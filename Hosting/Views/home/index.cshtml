@@ -1,0 +1,57 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Home";
+    List<HostingPaketi> hpaketi = (List<HostingPaketi>)ViewData["hp"];
+}
+
+<br />
+<h4>SMJESTITE VAŠU WEB STRANICU NA BRZE I POUZDANE WEB SERVERE</h4>
+Web serveri smješteni u vlastitom data centru omogućuju nam veću kontrolu, stabilnost te pouzdanost usluge. <br /><br />
+
+
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th></th>
+    <th> <div class="glyphicon-hdd glyphicon"></div> </th>
+    <th> <img src="~/slike/rsz_database.png" class="img-responsive" /> </th>
+    <th>E-mail adresa</th>
+    <th>Promet <img src="~/slike/rsz_promet.png" class="img-responsive" /> </th>
+    <th>Cijena/Godišnje -KM</th>
+    </thead>
+
+    @foreach (HostingPaketi x in hpaketi)
+    {
+        <tr>
+            <td>@x.NazivPaketa</td>
+            <td>@x.Prostor</td>
+            <td>@x.Baza</td>
+            <td>@x.EmailAdresa</td>
+            <td>@x.Promet</td>
+            <td>@x.Cijena</td>
+            <td> <a href="/Narudzbe/hostingkupi?hid=@x.Id" class="btn btn-default">Kupi</a> </td>
+        </tr>
+    }
+</table>
+
+<div class="row">
+    <div class="col-md-2">
+        <img src="~/slike/3.png" width="170" height="130" />
+    </div>
+    <div class="col-md-5">
+        <b>KO SMO MI?</b><br />
+        Poduzeće Hosty d.o.o. je nastalo izdvajanjem hosting usluge iz poduzeća Host d.o.o. a uslugama iz oblasti Web Hostinga i
+        registracije domena se bavimo od 2015. godine. Poduzeće je pod vodstvom mladih, ambicioznih i kreativnih ljudi čiji je primarni cilj predstaviti se
+        na tržištu konkurentnim cijenama te pouzdanom i kvalitetnom Web Hosting uslugom.
+    </div>
+    <div class="col-md-4" style="background: url(../../slike/2.png); border-color: rgb(238, 238, 238);">
+        <center>
+            <b> BESPLATNI SUPPORT TELEFON </b> <br />
+            <h1>
+                <div style="color: rgb(37, 170, 226)"> 030 000-000 </div>
+            </h1>
+            <br />
+            WWW.HOSTY.BA
+        </center>
+    </div>
+</div>

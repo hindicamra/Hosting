@@ -1,0 +1,228 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Klijent panel";
+    Layout = "~/Views/Shared/_LayoutKlijent.cshtml";
+    int? zakupljenoHostinga = (int?)ViewData["hostingPaketa"];
+    List<Ugovor> ugovoriHosting = (List<Ugovor>)ViewData["hostingPaketaKupljeno"];
+
+    int? brojZakupljenihVPS = (int?)ViewData["brojZakupljenihVPS"];
+    List<Ugovor> vpsugovori = (List<Ugovor>)ViewData["vpsugovori"];
+
+    int? brojZakupljenihDEDICATED = (int?)ViewData["brojZakupljenihDEDICATED"];
+    List<Ugovor> dedicatedugovori = (List<Ugovor>)ViewData["dedicatedugovori"];
+
+    int? brojZakupljenihDomena = (int?)ViewData["brojZakupljenihDomena"];
+    List<Ugovor> domenepaketiugovori = (List<Ugovor>)ViewData["domenepaketiugovori"];
+
+    int? brojZakupljenihSSL = (int?)ViewData["brojZakupljenihSSL"];
+    List<Ugovor> SSLugovori = (List<Ugovor>)ViewData["SSLugovori"];
+}
+
+<br />
+@if (zakupljenoHostinga != null && zakupljenoHostinga > 0)
+{
+    <label>Hosting zakupljeno: @zakupljenoHostinga</label>
+    <table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+        <thead>
+        <th> Paket: </th>
+        <th> Važi: </th>
+        <th> Status: </th>
+        <th> Prostor: </th>
+        <th> IPv4: </th>
+        <th> Promet: </th>
+        <th> Cijena: </th>
+        <th> Pristupni podaci: </th>
+        <th> </th>
+        </thead>
+
+        @foreach (Ugovor x in ugovoriHosting)
+        {
+        <tr style="background: @x.boja">
+            <td> @x.HostingPaketi.NazivPaketa </td>
+            <td> Od: @x.DatumOdobrenja.ToShortDateString() - Do: @x.DatumVazenja.ToShortDateString() (<b>@x.DatumVazenja.Subtract(@DateTime.Now).Days.ToString()</b>) </td>
+            <td> <b> @x.Status.Naziv </b> </td>
+            <td> @x.HostingPaketi.Prostor </td>
+            <td> @x.HostingPaketi.IPv4 </td>
+            <td> @x.HostingPaketi.Promet </td>
+            <td> @x.HostingPaketi.Cijena </td>
+            <td> @x.PristupnaAdresa @x.Username @x.Password </td>
+            <td>
+                @if (x.produzenje != true && x.StatusId>2)
+                {
+                    <a href="/ugovor/produzi?id=@x.Id" class="btn btn-success">Produži</a>
+                }
+            </td>
+        </tr>
+        }
+    </table>
+}
+
+
+@if (brojZakupljenihVPS != null && brojZakupljenihVPS > 0)
+{
+    <label>VPS zakupljeno: @brojZakupljenihVPS</label>
+    <table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+        <thead>
+        <th> Paket: </th>
+        <th> Važi: </th>
+        <th> <b> Status: </th>
+        <th> HDD: </th>
+        <th> CPU: </th>
+        <th> Ram/Swap: </th>
+        <th> IPv4: </th>
+        <th> Promet: </th>
+        <th> Cijena: </th>
+        <th> Pristupni podaci: </th>
+        <th> </th>
+        </thead>
+
+        @foreach (Ugovor x in vpsugovori)
+        {
+            <tr style="background: @x.boja">
+                <td> @x.VpsPaketi.NazivPaketa </td>
+                <td> Od: @x.DatumKreiranjaZahtjeva.ToShortDateString() - Do: @x.DatumVazenja.ToShortDateString() (<b>@x.DatumVazenja.Subtract(@DateTime.Now).Days.ToString()</b>) </td>
+                <td> <b> @x.Status.Naziv </b> </td>
+                <td> @x.VpsPaketi.HDD </td>
+                <td> @x.VpsPaketi.CPU </td>
+                <td> @x.VpsPaketi.RAM / @x.VpsPaketi.SWAP </td>
+                <td> @x.VpsPaketi.IPv4 </td>
+                <td> @x.VpsPaketi.Promet </td>
+                <td> @x.VpsPaketi.Cijena </td>
+                <td> @x.PristupnaAdresa @x.Username @x.Password </td>
+                <td>
+                    @if (x.produzenje != true && x.StatusId > 2)
+                    {
+                        <a href="/ugovor/produzi?id=@x.Id" class="btn btn-success">Produži</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (brojZakupljenihDEDICATED != null && brojZakupljenihDEDICATED > 0)
+{
+    <label>DEDICATED zakupljeno: @brojZakupljenihDEDICATED</label>
+    <table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+        <thead>
+        <th> Paket: </th>
+        <th> Važi: </th>
+        <th> Status: </th>
+        <th> HDD primarni: </th>
+        <th> HDD sekundarni: </th>
+        <th> Promet: </th>
+        <th> CPU: </th>
+        <th> RAM: </th>
+        <th> IPv4: </th>
+        <th> Promet: </th>
+        <th> Cijena: </th>
+        <th> Pristupni podaci: </th>
+        <th> </th>
+        </thead>
+
+        @foreach (Ugovor x in dedicatedugovori)
+        {
+            <tr style="background: @x.boja">
+                <td> @x.DedicatedPaketi.Naziv </td>
+                <td> Od: @x.DatumKreiranjaZahtjeva.ToShortDateString() - Do: @x.DatumVazenja.ToShortDateString() (<b>@x.DatumVazenja.Subtract(@DateTime.Now).Days.ToString()</b>) </td>
+                <td> <b> @x.Status.Naziv </b> </td>
+                <td> @x.DedicatedPaketi.HDDPrimar </td>
+                <td> @x.DedicatedPaketi.HDDSekundar </td>
+                <td> @x.DedicatedPaketi.Promet </td>
+                <td> @x.DedicatedPaketi.CPU </td>
+                <td> @x.DedicatedPaketi.Ram </td>
+                <td> @x.DedicatedPaketi.IPv4 </td>
+                <td> @x.DedicatedPaketi.Promet </td>
+                <td> @x.DedicatedPaketi.Cijena </td>
+                <td> @x.PristupnaAdresa @x.Username @x.Password </td>
+                <td>
+                    @if (x.produzenje != true && x.StatusId > 2)
+                    {
+                        <a href="/ugovor/produzi?id=@x.Id" class="btn btn-success">Produži</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (brojZakupljenihDomena != null && brojZakupljenihDomena > 0)
+{
+    <label>Domene zakupljeno: @brojZakupljenihDomena</label>
+    <table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+        <thead>
+        <th> Paket: </th>
+        <th> Domena: </th>
+        <th> Važi: </th>
+        <th> Status: </th>
+        <th> Cijena aktivacije: </th>
+        <th> Cijena prva godina: </th>
+        <th> Cijena svaka naredna godina: </th>
+        <th> Cijena uz hosting: </th>
+        <th> </th>
+        </thead>
+
+        @foreach (Ugovor x in domenepaketiugovori)
+        {
+            <tr style="background: @x.boja">
+                <td> @x.Domena.Domena.Naziv </td>
+                <td> @x.ZakupljeniDomen@x.Domena.Domena.Naziv </td>
+                <td> Od: @x.DatumKreiranjaZahtjeva.ToShortDateString() - Do: @x.DatumVazenja.ToShortDateString() (<b>@x.DatumVazenja.Subtract(@DateTime.Now).Days.ToString()</b>) </td>
+                <td> <b> @x.Status.Naziv </b> </td>
+                <td> @x.Domena.CijenaAktivacije </td>
+                <td> @x.Domena.CijenaZaPrvuGodinu </td>
+                <td> @x.Domena.SvakaNarednaGodina </td>
+                <td> @x.Domena.CijenaUzWebHosting </td>
+                <td>
+                    @if (x.produzenje != true && x.StatusId > 2)
+                    {
+                        <a href="/ugovor/produzi?id=@x.Id" class="btn btn-success">Produži</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (brojZakupljenihSSL != null && brojZakupljenihSSL > 0)
+{
+    <label>SSL zakupljeno: @brojZakupljenihSSL</label>
+    <table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+        <thead>
+        <th> Paket: </th>
+        <th> Domena: </th>
+        <th> Status: </th>
+        <th> Važi: </th>
+        <th> Zelena traka: </th>
+        <th> Kompaktibilno sa mobitelima: </th>
+        <th> Vrsta provjere: </th>
+        <th> Brzina izdavanja: </th>
+        <th> Garancija izdavača: </th>
+        <th> Cijena: </th>
+        <th> </th>
+        </thead>
+
+        @foreach (Ugovor x in SSLugovori)
+        {
+            <tr style="background: @x.boja">
+                <td> @x.SSLPaketi.Naziv </td>
+                <td> @x.SSLZaDomenu </td>
+                <td> <b> @x.Status.Naziv </b> </td>
+                <td> Od: @x.DatumKreiranjaZahtjeva.ToShortDateString() - Do: @x.DatumVazenja.ToShortDateString() (<b>@x.DatumVazenja.Subtract(@DateTime.Now).Days.ToString()</b>) </td>
+                <td> <input type="checkbox" checked="@x.SSLPaketi.ZelenaTraka" class="checkbox-inline" disabled="disabled" /> </td>
+                <td> <input type="checkbox" checked="@x.SSLPaketi.KompaktibilnoSaMobitelima" class="checkbox-inline" disabled="disabled" /> </td>
+                <td> @x.SSLPaketi.VrstaProvjere </td>
+                <td> @x.SSLPaketi.BrzinaIzdavanja </td>
+                <td> @x.SSLPaketi.GrancijaIzdavaca </td>
+                <td> @x.SSLPaketi.Cijena </td>
+                <td>
+                    @if (x.produzenje != true && x.StatusId > 2)
+                    {
+                        <a href="/ugovor/produzi?id=@x.Id" class="btn btn-success">Produži</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}

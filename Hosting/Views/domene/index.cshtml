@@ -1,0 +1,49 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Domene";
+    List<DomenePaketi> dp = ViewData["dp"] as List<DomenePaketi>;
+}
+
+<br />
+<div class="row" style="border-left-style: solid; border-left-color: rgb(66, 181, 230); border-left-width: 4px; padding-left: 10px">
+    <div>
+        <div class="col-md-2">
+            <img src="~/slike/9.jpg" width="170" height="130" />
+        </div>
+
+        <div class="col-md-10">
+            <b>Šta je domena?</b> <br />
+            Domena je jedinstveno ime koje identificira određeni web site. Domena se sastoji uvijek od 2 ili više dijelova, razdvojenih točkama. Kao npr. "yahoo.com" ili "amazon.co.uk". Domena
+            je adresa vaše web stranice, ono što će korisnik upisati u svoj browser da bi mu se otvorila ta stranica.
+            <br />
+            Gledano s 'tehničke' strane, domena je zapravo pseudonim koji zamjenjuje brojčani internet protokol (tj. IP adresu, naprimjer 134.34.255.186) koja je namjenjen komunikaciji između
+            pc-a, sa tekstualnim nazivom koji je namjenjen ljudima. Svaka IP adresa, kao i domena, mora biti jednistvena.
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Domen</th>
+    <th>Aktivacija -KM</th>
+    <th>Registracija -KM</th>
+    <th>Produženje -KM</th>
+    <th>Cijena uz web hosting -KM</th>
+    </thead>
+
+    @foreach (DomenePaketi x in dp)
+    {
+        <tr>
+            <td>@x.Domena.Naziv</td>
+            <td>@x.CijenaAktivacije</td>
+            <td>@x.CijenaZaPrvuGodinu</td>
+            <td>@x.SvakaNarednaGodina</td>
+            <td>@x.CijenaUzWebHosting</td>
+            <td> <a href="/Narudzbe/domenkupi?id=@x.Id" class="btn btn-default">Kupi</a> </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,49 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "DEDICATED";
+    List<DedicatedPaketi> dp = ViewData["dp"] as List<DedicatedPaketi>;
+}
+<br />
+<div style="background: rgb(249, 249, 249); border-left-style: solid; border-left-color: rgb(66, 181, 230); border-left-width: 4px; padding-left: 10px">
+    <b>Zašto izabrati Dedicated servere iz naše ponude?</b> <br />
+    Ako Vam shared Web Hosting ili Virtualni Privatni Server nije dovoljan i želite maksimalne performanse i mogućnost detaljne konfiguracije Vašeg servera, ili čak mogućnost preprodaje
+    Vašeg prostora i prometa trećim licima onda je zakup Dedicated Servera iz naše ponude najbolji izbor. Dedicated Serveri iz naše ponude su vrhunski Serveri bazirani na DEL i HP harverskoj
+    platformi te su fizički smješteni u vlastitom data centru u Bosni i Hercegovini. Serveri su smješteni u vrhunskim uvjetima u prostoriji sa redudantnom klimatizacijom, redudantnim napajanjem
+    elektručnom energijom koje obezbjeđuju UPS i agregat visoke snage, te redudantni Internet linkovi prema najvećim internet provajderima. Odabir Dedicated servera je velik korak za svaku tvrtku
+    ili pojedinca zato ako trebate pomoć pri odabiru slobodno nas kontaktirajte, rado ćemo Vam pomoći pri odabiru, pa ako treba, napraviti za Vas posebnu ponudu i konfiguraciju.
+</div>
+<br />
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th></th>
+    <th> <img src="~/slike/rsz_cpu.png" class="img-responsive" /> </th>
+    <th> <img src="~/slike/rsz_ram.png" class="img-responsive" /> </th>
+    <th>Primarni <div class="glyphicon glyphicon-hdd"></div> </th>
+    <th>Sekundarni <div class="glyphicon glyphicon-hdd"></div></th>
+    <th>OS</th>
+    <th> Promet <img src="~/slike/rsz_promet.png" class="img-responsive" /> </th>
+    <th> <img src="~/slike/rsz_ip.png" class="img-responsive" /> </th>
+    <th> <img src="~/slike/rsz_ip.png" class="img-responsive" /> </th>
+    <th>Nadogradnja</th>
+    <th>Cijena/Mjesec -KM</th>
+    </thead>
+
+    @foreach (DedicatedPaketi x in dp)
+    {
+        <tr>
+            <td>@x.Naziv</td>
+            <td>@x.CPU</td>
+            <td> @x.Ram</td>
+            <td> @x.HDDPrimar</td>
+            <td> @x.HDDSekundar</td>
+            <td>@x.OS</td>
+            <td>@x.Promet</td>
+            <td>@x.IPv4</td>
+            <td>@x.IPv6</td>
+            <td>@x.Nadogradnja</td>
+            <td>@x.Cijena</td>
+            <td> <a href="/Narudzbe/dedicatedkupi?did=@x.Id" class="btn btn-default">Kupi</a> </td>
+        </tr>
+    }
+</table>

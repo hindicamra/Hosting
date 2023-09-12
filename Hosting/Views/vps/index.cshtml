@@ -1,0 +1,54 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "VPS";
+    List<VpsPaketi> vps = (List<VpsPaketi>)ViewData["vps"];
+}
+
+<br />
+<div style="background: rgb(249, 249, 249); border-left-style: solid; border-left-color: rgb(66, 181, 230); border-left-width: 4px; padding-left: 10px">
+    <b>Shared web Hosting ne ispunjava Vaše zahtjeve i potreban Vam je vlastiti web server?</b> <br />
+    Ukoliko shared web Hosting ne ispunjava Vaše zahtjeve i imate potrebu za dedicate server a niste u mogucnosti izdvojiti sredstva za zakup? Mi imamo riješenje za Vas.
+    Nudimo Vam zakup virtuelnih privatnih servera baziranih na Linux operativnom sistemu. Virtualni privatni server (VPS) je jedna od mnogih virtualnih mašina koje se
+    pokreću na jednom računaru. Iako VPS pokreće softver na istom fizičkom računaru kao i druge korisničke virtualne mašine, on je u mnogim aspektima funkcionalnosti isti
+    kao i odvojeni fizički računar. VPS je posvećen individualnim korisničkim potrebama, ima privatnost odvojenog fizičkog računara.
+</div>
+
+<br /><br />
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th></th>
+    <th> <div class="glyphicon glyphicon-hdd"></div> </th>
+    <th>Promet <img src="~/slike/rsz_promet.png" class="img-responsive" /> </th>
+    <th> <img src="~/slike/rsz_cpu.png" class="img-responsive" /> </th>
+    <th> <img src="~/slike/rsz_ram.png" class="img-responsive" /> </th>
+    <th>Swap</th>
+    <th>OS</th>
+    <th> <img src="~/slike/rsz_ip.png" class="img-responsive" /> </th>
+    <th> <img src="~/slike/rsz_ip.png" class="img-responsive" /> </th>
+    <th>Konfiguracija -KM</th>
+    <th>Cijena/mjesec -KM</th>
+    </thead>
+
+    @foreach (VpsPaketi x in vps)
+    {
+        <tr>
+            <td>@x.NazivPaketa</td>
+            <td>@x.HDD</td>
+            <td>@x.Promet</td>
+            <td>@x.CPU</td>
+            <td>@x.RAM</td>
+            <td>@x.SWAP</td>
+            <td>@x.OS</td>
+            <td>@x.IPv4</td>
+            <td>@x.IPv6</td>
+            <td>@x.Konfiguracija</td>
+            <td>@x.Cijena</td>
+            <td> <a href="/Narudzbe/vpskupi?vpsid=@x.Id" class="btn btn-default">Kupi</a> </td>
+        </tr>
+    }
+</table>
+
+<h5>NAPOMENA:</h5>
+
+U navedene cijene je uračunat PDV po stopi od 17%.

@@ -1,0 +1,44 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Dedicated";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<DedicatedPaketi> d = (List<DedicatedPaketi>) ViewData["d"];
+}
+
+<br/>
+@Html.ActionLink("Novi dedicated", "DedicatedPaketiDodaj", "dedicated", null, new { @class = "btn btn-default" })<br />
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Naziv</th>
+    <th>CPU</th>
+    <th>Ram</th>
+    <th>Primarni HDD</th>
+    <th>Sekundarni HDD</th>
+    <th>OS</th>
+    <th>Promet</th>
+    <th>IPv4</th>
+    <th>IPv6</th>
+    <th>Nadogradnja</th>
+    <th>Cijena/Mjesec -KM</th>
+    <th>Akcija</th>
+    </thead>
+
+    @foreach (DedicatedPaketi x in d)
+    {
+        <tr>
+            <td>@x.Naziv</td>
+            <td>@x.CPU</td>
+            <td>@x.Ram</td>
+            <td>@x.HDDPrimar</td>
+            <td>@x.HDDSekundar</td>
+            <td>@x.OS</td>
+            <td>@x.Promet</td>
+            <td>@x.IPv4</td>
+            <td>@x.IPv6</td>
+            <td>@x.Nadogradnja</td>
+            <td>@x.Cijena</td>
+            <td><a href="/dedicated/deaktivacija?id=@x.Id" class="btn btn-default">Deaktivacija</a></td>
+        </tr>
+    }
+</table>

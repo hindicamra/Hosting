@@ -1,0 +1,44 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "VPS";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<VpsPaketi> v = (List<VpsPaketi>)ViewData["v"];
+}
+
+<br />
+@Html.ActionLink("Novi VPS", "VpsPaketiDodaj", "vps", null, new { @class = "btn btn-default" })<br />
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Paket</th>
+    <th>Prostor</th>
+    <th>Promet</th>
+    <th>CPU</th>
+    <th>Ram</th>
+    <th>Swap</th>
+    <th>OS</th>
+    <th>IPv4</th>
+    <th>IPv6</th>
+    <th>Konfiguracija -KM</th>
+    <th>Cijena/mjesec -KM</th>
+    <th>Akcija</th>
+    </thead>
+
+    @foreach (VpsPaketi x in v)
+    {
+        <tr>
+            <td>@x.NazivPaketa</td>
+            <td>@x.HDD</td>
+            <td>@x.Promet</td>
+            <td>@x.CPU</td>
+            <td>@x.RAM</td>
+            <td>@x.SWAP</td>
+            <td>@x.OS</td>
+            <td>@x.IPv4</td>
+            <td>@x.IPv6</td>
+            <td>@x.Konfiguracija</td>
+            <td>@x.Cijena</td>
+            <td><a href="/vps/deaktiviraj?id=@x.Id" class="btn btn-default">Deaktiviraj</a></td>
+        </tr>
+    }
+</table>

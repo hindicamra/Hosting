@@ -1,0 +1,24 @@
+﻿@using DataAccessLayer.Klase
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Novi kanton";
+    List<Drzave> d = (List<Drzave>) ViewData["d"];
+}
+
+<br/>
+<form action="/DrzavaKantonGrad/KantonSnimi">
+    <div class="form-group">
+        <label>Kanton:</label>
+        <input type="text" name="Naziv" class="form-control" placeholder="Kanton" />
+    </div>
+    <div class="form-group">
+        <label>Država:</label>
+        <select id="Drzava" name="Drzava" class="form-control">
+            @foreach (Drzave x in d)
+            {
+                <option name="@x.Id" value="@x.Id">@x.Naziv</option>
+            }
+        </select>
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default"/>
+</form>

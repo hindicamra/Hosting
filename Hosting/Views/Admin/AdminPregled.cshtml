@@ -1,0 +1,44 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<Admin> a = (List<Admin>) ViewData["a"];
+}
+
+<br />
+
+<script src="~/scripts/jquery-3.1.1.js"></script>
+<script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+
+<br />
+<br />
+@using (Ajax.BeginForm("Dodaj", "Admin", new AjaxOptions() { UpdateTargetId = "izlaz" }))
+{
+    <input type="submit" value="Dodaj" class="btn btn-default" />
+}
+
+
+<br />
+<div id="izlaz"></div>
+
+
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Admin:</th>
+    <th>E-mail:</th>
+    <th>Head:</th>
+    <th>Akcije:</th>
+    </thead>
+
+    @foreach (Admin x in a)
+    {
+        <tr>
+            <td>@x.Ime @x.Prezime</td>
+            <td>@x.Email</td>
+            <td> <input type="radio" class="radio-inline" checked="@x.AdminHead"/> </td>
+            <td> <a href="/Admin/Brisi?Id=@x.Id" class="btn btn-danger">Izbriši</a> </td>
+            <td> <a href="/Admin/PrikaziPw?Id=@x.Id" class="btn btn-info">Prikaži password</a> </td>
+        </tr>
+    }
+</table>

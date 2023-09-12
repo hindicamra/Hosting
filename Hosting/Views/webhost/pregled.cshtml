@@ -1,0 +1,47 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Web hosting";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<HostingPaketi> h = (List<HostingPaketi>)ViewData["h"];
+}
+
+<br />
+@Html.ActionLink("Novi web hosting", "HostingPaketiDodaj", "webhost", null, new { @class = "btn btn-default" })<br />
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Paket</th>
+    <th>Prostor</th>
+    <th>Baza</th>
+    <th>E-mail adresa</th>
+    <th>Promet</th>
+    <th>IPv4</th>
+    <th>IPv6</th>
+    <th>Pod domena</th>
+    <th>Addon domena</th>
+    <th>Parked domena</th>
+    <th>FTP naloga</th>
+    <th>Cijena/Godišnje -KM</th>
+    <th>Akcija</th>
+    </thead>
+
+    @foreach (HostingPaketi x in h)
+    {
+        <tr>
+            <td>@x.NazivPaketa</td>
+            <td>@x.Prostor</td>
+            <td>@x.Baza</td>
+            <td>@x.EmailAdresa</td>
+            <td>@x.Promet</td>
+            <td>@x.IPv4</td>
+            <td>@x.IPv6</td>
+            <td>@x.PodDomena</td>
+            <td>@x.AddonDomene</td>
+            <td>@x.ParkedDomene</td>
+            <td>@x.FTPNaloga</td>
+            <td>@x.Cijena</td>
+            <td> <a href="/webhost/edit?id=@x.Id" class="btn btn-default">Edit</a>
+                 <a href="/webhost/deaktiviraj?id=@x.Id" class="btn btn-danger">Deaktiviraj</a> </td>
+        </tr>
+    }
+</table>

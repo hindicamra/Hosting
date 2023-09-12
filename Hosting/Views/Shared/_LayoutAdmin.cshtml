@@ -1,0 +1,151 @@
+﻿@using System
+@using System.Web.UI.HtmlControls
+@using DataAccessLayer
+@using DataAccessLayer.Klase
+@{
+    var user = Session["admin"] as Admin;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Hosting</title>
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+
+        .aligntobottom {
+            bottom: 0;
+            position: absolute;
+        }
+    </style>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    @if (user != null)
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink(" ", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand glyphicon glyphicon-home" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Nove IP", "DostupneIPDodaj", "IP", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li>@Html.ActionLink("Ugovori", "Index", "ugovor", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        @if (user.AdminHead)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Konfiguracija<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Admin", "AdminPregled", "Admin")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Web hosting", "pregled", "webhost")</li>
+                                    <li>@Html.ActionLink("SSL", "pregled", "ssl")</li>
+                                    <li>@Html.ActionLink("Domen - paketi", "DodajDomenDomenPaket", "domene")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Država-Kanton-Grad", "pregled", "DrzavaKantonGrad")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mašine<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("VPS", "pregled", "vps")</li>
+                                    <li>@Html.ActionLink("Dedicated", "pregled", "dedicated")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Novi rack", "RackDodaj", "rack")</li>
+                                    <li>@Html.ActionLink("Novi server", "ServeriDodaj", "server")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Log<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Admin log", "Log", "Admin")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Klijent log", "Log", "Klijent")</li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    <ul class="navbar-brand  pull-right">
+                        @{
+                            mssql s = new mssql();
+                            int br = s.Tiketi.Count(x => x.Odgovoreno == false && x.Zavrsen == false);
+                            if (br > 0)
+                            {
+                                @Html.ActionLink(" Tiket sistem", "PregledAdmin", "tiket", null, new { @class = "glyphicon glyphicon-send", @style = "color: red" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink(" ", "PregledAdmin", "tiket", null, new { @class = "glyphicon glyphicon-send", @style = "color: green" })
+                            }
+                        }
+
+                        @Html.ActionLink(@user.Ime+" "+@user.Prezime, "PromjenaPassworda", "Admin", null, null)
+                        @Html.ActionLink(" ", "Logout", "Admin", null, new { @class = "glyphicon glyphicon-log-out", @style = "color: red" })
+                    </ul>
+                </div>
+            </div>
+            <div style="height: 4px;  background-color: rgb(37, 171, 226)"></div>
+        </div>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <div style="height: 8px; background-color: rgb(37, 171, 226)"></div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <p>&copy; @DateTime.Now.Year - Hosting</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>Powered by ASP.NET MVC & MSSQL</p>
+                    </div>
+                </div>
+            </footer>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <b>Adresa :</b> <br />
+                    000 Adresa 00 0000, Donji Vakuf,<br /> Bosna i Hercegovina <br /> <br />
+
+                    Banka: ImeBanke <br />
+                    Žiro račun: 0000 0000 0000 0000
+                </div>
+
+                <div class="col-md-3">
+                    <b>Kontakt:</b> <br />
+                    Tel. +387 00 000-000 <br />
+                    Fax. +387 00 000-000 <br />
+                    Prodaja: <a href="mailto:prodaja@hosty.ba" style="text-decoration: none;">prodaja@hosty.ba</a> <br />
+                    Info: <a href="mailto:prodaja@hosty.ba" style="text-decoration: none;">info@hosty.ba</a> <br />
+                    Zloupotrebe: <a href="mailto:prodaja@hosty.ba" style="text-decoration: none;">abouse@hosty.ba</a>
+                </div>
+
+                <div class="col-md-3">
+                    <b>UVJETI I PRAVILA:</b> <br />
+
+                    <a href="/uvjeti" style="color: black; text-decoration: none">> Uvjeti korištenja</a> <br />
+                    <a href="/osobnipodaci" style="color: black; text-decoration: none">> Osobni podaci</a>
+                </div>
+            </div>
+
+        </div>
+        <script src="~/scripts/jquery-3.1.1.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+                            }
+                            else
+                            {
+                                Response.Redirect("/Admin/Login");
+                            }
+</body>
+</html>

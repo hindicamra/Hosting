@@ -1,0 +1,88 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "PregledAdmin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<Tiketi> t = (List<Tiketi>)ViewData["t"];
+    string error = (string) ViewData["error"];
+}
+
+<h2>Tiketi</h2>
+<label>@error</label>
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Naslov:</th>
+    <th>Datum:</th>
+    <th>Klijent:</th>
+    <th>Admin:</th>
+    <th>Akcija:</th>
+    </thead>
+
+    @foreach (Tiketi x in t)
+    {
+        var user = Session["admin"] as Admin;
+
+        if (x.Odgovoreno == false)
+        {
+            <tr style="background: red">
+                <td>@x.Naslov</td>
+                <td>@x.Datum</td>
+                <td>@x.Klijenti.Ime @x.Klijenti.Prezime</td>
+                @if (@x.AdminId != null)
+                {
+                    <td>@x.Admin.Ime @x.Admin.Prezime</td>
+                }
+                else
+                {
+                    <td> <a href="/tiket/preuzmi?id=@x.Id" class="btn btn-default">Preuzmi tiket</a> </td>
+                }
+
+                <td>
+                    @if (@user.Id == @x.AdminId)
+                    {
+                        <a href="/tiket/zatvoriA?id=@x.Id" class="btn btn-default glyphicon glyphicon-remove"></a>
+                    }
+                    else
+                    {
+                        if (@x.AdminId != null)
+                        {
+                            <a href="/tiket/preuzmi?id=@x.Id" class="btn btn-info">Preuzmi tiket</a>
+                        }
+                    }
+                    <a href="/Tiket/otvoriA?id=@x.Id" class="btn btn-default">Otvori tiket</a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr style="background:aquamarine">
+                <td>@x.Naslov</td>
+                <td>@x.Datum</td>
+                <td>@x.Klijenti.Ime @x.Klijenti.Prezime</td>
+                @if (@x.Admin != null)
+                {
+                    <td>@x.Admin.Ime @x.Admin.Prezime</td>
+                }
+                else
+                {
+                    <td> <a href="/tiket/preuzmi?id=@x.Id" class="btn btn-default">Preuzmi tiket</a> </td>
+                }
+
+                <td>
+                    @if (@user.Id == @x.AdminId)
+                    {
+                        <a href="/tiket/zatvoriA?id=@x.Id" class="btn btn-default glyphicon glyphicon-remove"></a>
+                    }
+                    else
+                    {
+                        if (@x.AdminId != null)
+                        {
+                            <a href="/tiket/preuzmi?id=@x.Id" class="btn btn-info">Preuzmi tiket</a>
+                        }
+                    }
+                    <a href="/Tiket/otvoriA?id=@x.Id" class="btn btn-default">Otvori tiket</a>
+                </td>
+            </tr>
+        }
+    }
+</table>

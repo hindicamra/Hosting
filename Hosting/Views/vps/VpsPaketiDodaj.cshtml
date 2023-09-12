@@ -1,0 +1,65 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Vps paketi dodaj";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<Serveri> s = (List<Serveri>)ViewData["s"];
+}
+
+<br />
+<form action="/vps/VpsPaketiSnimi">
+    <div class="form-group">
+        <label>Paket:</label>
+        <input type="text" name="Paket" class="form-control" placeholder="Paket" />
+    </div>
+    <div class="form-group">
+        <label>HDD:</label>
+        <input type="text" name="HDD" class="form-control" placeholder="HDD" />
+    </div>
+    <div class="form-group">
+        <label>Promet:</label>
+        <input type="text" name="Promet" class="form-control" placeholder="Promet" />
+    </div>
+    <div class="form-group">
+        <label>CPU:</label>
+        <input type="text" name="CPU" class="form-control" placeholder="CPU" />
+    </div>
+    <div class="form-group">
+        <label>RAM:</label>
+        <input type="text" name="RAM" class="form-control" placeholder="RAM" />
+    </div>
+    <div class="form-group">
+        <label>SWAP:</label>
+        <input type="text" name="SWAP" class="form-control" placeholder="SWAP" />
+    </div>
+    <div class="form-group">
+        <label>OS:</label>
+        <input type="text" name="OS" class="form-control" placeholder="OS" />
+    </div>
+    <div class="form-group">
+        <label>IPV4:</label>
+        <input type="text" name="IPV4" class="form-control" placeholder="IPV4" />
+    </div>
+    <div class="form-group">
+        <label>IPV6:</label>
+        <input type="text" name="IPV6" class="form-control" placeholder="IPV6" />
+    </div>
+    <div class="form-group">
+        <label>Konfiguracija:</label>
+        <input type="text" name="Konfiguracija" class="form-control" placeholder="Konfiguracija" />
+    </div>
+    <div class="form-group">
+        <label>Cijena:</label>
+        <input type="text" name="Cijena" class="form-control" placeholder="Cijena" />
+    </div>
+    <div class="form-group">
+        <label>Server:</label>
+        <select id="Server" name="Server" class="form-control">
+            @foreach (Serveri x in s)
+            {
+                <option value="@x.Id">@x.Naziv </option>
+            }
+        </select>
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-default" />
+</form>

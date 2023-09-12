@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Klijent Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string username = (string)ViewData["username"];
+    string password = (string) ViewData["password"];
+}
+
+<br/>
+Vaši podaci su evidentirani. Pristupni podaci su:<br/><br/>
+<label>Username: </label><label>@username</label><br/>
+<label>Password: </label><label>@password</label>

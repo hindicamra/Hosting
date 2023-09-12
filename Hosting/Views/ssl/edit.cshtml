@@ -1,0 +1,59 @@
+﻿@using DataAccessLayer.Klase
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    SSLPaketi s = (SSLPaketi)ViewData["ssl"];
+}
+
+<h2>Edit</h2>
+
+<form action="/ssl/SnimiEdit">
+    <input type="hidden" name="Id" value="@s.Id" />
+    <div class="form-group">
+        <label>Paket:</label>
+        <input type="text" name="Paket" class="form-control" placeholder="Paket" value="@s.Naziv" />
+    </div>
+    <div class="form-group">
+        <label>Vrsta provjere:</label>
+        <input type="text" name="VrstaProvjere" class="form-control" placeholder="Vrsta provjere" value="@s.VrstaProvjere" />
+    </div>
+    <div class="form-group">
+        <label>Nivo povjerenja:</label>
+        <input type="text" name="NivoPovjerenja" class="form-control" placeholder="Nivo povjerenja" value="@s.NivoPovjerenja" />
+    </div>
+    <div class="form-group">
+        <label>Zelena traka:</label>
+        <input type="checkbox" name="ZelenaTraka" class="form-control" checked="@s.ZelenaTraka" />
+    </div>
+    <div class="form-group">
+        <label>Garancija izdavača:</label>
+        <input type="text" name="GarancijaIzdavaca" class="form-control" placeholder="Garancija izdavača" value="@s.GrancijaIzdavaca" />
+    </div>
+    <div class="form-group">
+        <label>Broj osiguranih poddomena:</label>
+        <input type="text" name="BrojOsiguranihPoddomena" class="form-control" placeholder="Broj osiguranih poddomena" value="@s.BrojOsiguranihPoddomena" />
+    </div>
+    <div class="form-group">
+        <label>Brzina izdavanja:</label>
+        <input type="text" name="BrzinaIzdavanja" class="form-control" placeholder="Brzina izdavanja" value="@s.BrzinaIzdavanja" />
+    </div>
+    <div class="form-group">
+        <label>SSL enkripcija:</label>
+        <input type="text" name="SSLEnkripcija" class="form-control" placeholder="SSL enkripcija" value="@s.SSLEnkripcija" />
+    </div>
+    <div class="form-group">
+        <label>Kompaktibilno sa 99% uređaja:</label>
+        <input type="checkbox" name="Kompaktibilno" class="checkbox" checked="@s.Kompaktibilno" />
+    </div>
+    <div class="form-group">
+        <label>Kompaktibilno sa mobilnim uređajima:</label>
+        <input type="checkbox" name="KompaktibilnoMob" class="checkbox" checked="@s.KompaktibilnoSaMobitelima" />
+    </div>
+    <div class="form-group">
+        <label>Cijena:</label>
+        <input type="text" name="Cijena" class="form-control" placeholder="Cijena" value="@s.Cijena" />
+    </div>
+
+    <input type="submit" value="Snimi" class="btn btn-default" />
+
+</form>

@@ -1,0 +1,18 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Hosting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int hid = (int)ViewData["hid"];
+}
+
+<br />
+<form action="/Narudzbe/HostingSnimi">
+    <div class="form-inline">
+        <label>Domen:</label>
+        <input type="text" name="Domena" class="form-control" placeholder="Domena" />
+        <input type="hidden" name="hid" class="form-control" value="@hid" hidden="True" />
+        <input type="submit" value="Snimi" class="btn btn-default" />
+    </div>
+
+</form>

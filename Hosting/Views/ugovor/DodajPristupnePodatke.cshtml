@@ -1,0 +1,68 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Pristupni podaci";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Ugovor u = (Ugovor) ViewData["u"];
+}
+
+<h2>Pristupni podaci:</h2>
+@if (@u.DedicatedPaketiId != null)
+{
+    <label>Usluga: </label>
+    @u.DedicatedPaketi.Naziv
+}
+@if (@u.VpsPaketiId != null)
+{
+    <label>Usluga: </label>
+    @u.VpsPaketi.NazivPaketa
+}
+@if (@u.ZakupljeniDomen != null)
+{
+    <label>Usluga: </label>
+    @u.ZakupljeniDomen
+}
+@if (@u.DomenaId != null)
+{
+    <label>Usluga: </label>
+    @u.ZakupljeniDomen @u.Domena.Domena.Naziv
+}
+
+<form action="/ugovor/DodajPristupnePodatkeSnimi">
+    <input type="hidden" name="id" value="@u.Id"/>
+    <div>
+        <label>Pristupna adresa: </label>
+        @if (@u.PristupnaAdresa != null)
+        {
+            <input type="text" name="PA" value="@u.PristupnaAdresa" class="form-control" />
+        }
+        else
+        {
+            <input type="text" name="PA" placeholder="Pristupna adresa" class="form-control" />
+        }
+    </div>
+    <div>
+        <label>Username: </label>
+        @if (@u.Username != null)
+        {
+            <input type="text" name="U" value="@u.Username" class="form-control" />
+        }
+        else
+        {
+            <input type="text" name="U" placeholder="Username" class="form-control" />
+        }
+    </div>
+    <div>
+        <label>Password: </label>
+        @if (@u.Username != null)
+        {
+            <input type="text" name="P" value="@u.Password" class="form-control" />
+        }
+        else
+        {
+            <input type="text" name="P" placeholder="Password" class="form-control" />
+        }
+    </div>
+    <br/>
+    <input type="submit" value="Snimi" class="btn btn-default"/>
+</form>

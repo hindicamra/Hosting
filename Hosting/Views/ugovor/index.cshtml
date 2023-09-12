@@ -1,0 +1,92 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Ugovori";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<Ugovor> u = (List<Ugovor>)ViewData["u"];
+    List<Status> status = (List<Status>)ViewData["status"];
+}
+
+<h2>Ugovori</h2>
+
+<form action="/ugovor/Pretraga">
+    <div>
+        <label>Ime: </label>
+        <input type="text" name="I" placeholder="Ime" class="form-control"/>
+    </div>
+    <div>
+        <label>Prezime: </label>
+        <input type="text" name="P" placeholder="Prezime" class="form-control" />
+    </div>
+    <br/>
+    <input type="submit" value="Pretraga" class="btn btn-default"/>
+    <br /><br />
+</form>
+
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th>Usluga:</th>
+    <th>Datum kreiranja:</th>
+    <th>Datum važenja:</th>
+    <th>Klijent:</th>
+    <th>Status:</th>
+    <th>Akcija</th>
+    </thead>
+
+    @foreach (Ugovor x in u)
+    {
+        <form action="/Ugovor/Promjeni">
+            <input type="hidden" name="uid" value="@x.Id" />
+            <tr style="background: @x.boja">
+                <td>
+                    @if (@x.SSLPaketiId != null)
+                    {<b>SSL</b> @x.SSLPaketi.Naziv <label> - </label> @x.SSLPaketi.Cijena}
+                    @if (@x.HostingPaketiId != null)
+                    {<b>Hosting</b> @x.HostingPaketi.NazivPaketa <label> - </label> @x.HostingPaketi.Cijena <label> - </label> @x.ZakupljeniDomen}
+                    @if (@x.DedicatedPaketiId != null)
+                    {<b>Dedicated</b> @x.DedicatedPaketi.Naziv <label> - </label> @x.DedicatedPaketi.Cijena}
+                    @if (@x.VpsPaketiId != null)
+                    {<b>VPS</b> @x.VpsPaketi.NazivPaketa <label> - </label> @x.VpsPaketi.Cijena}
+                    @if (@x.DomenaId != null)
+                    {<b>Domena</b> @x.ZakupljeniDomen@x.Domena.Domena.Naziv  <label> - </label> @x.Domena.CijenaZaPrvuGodinu}
+                </td>
+                <td>@x.DatumKreiranjaZahtjeva.ToShortDateString()</td>
+                <td> <label>Od: </label> @x.DatumOdobrenja.ToShortDateString() <label> Do: </label>  @x.DatumVazenja.ToShortDateString() (<b>@x.DatumVazenja.Subtract(@DateTime.Now).Days.ToString()</b>) </td>
+                <td>@x.Klijenti.Ime @x.Klijenti.Prezime</td>
+                <td>
+                    <select name="status" class="form-control">
+                        @foreach (Status s in status)
+                        {
+                            if (s.Naziv == x.Status.Naziv)
+                            {
+                        <option value="@s.Id" selected>@s.Naziv</option>}
+                            else
+                            {
+                        <option value="@s.Id">@s.Naziv</option>}
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="submit" value="Promjeni" class="btn btn-default" />
+                    <a href="/Ugovor/Deaktiviraj?id=@x.Id" class="btn btn-danger glyphicon glyphicon-remove"> </a>
+                    <a href="/Ugovor/Aktiviraj?id=@x.Id" class="btn btn-success glyphicon glyphicon glyphicon-ok"> </a>
+                    @if (x.produzenje)
+                    {
+                        <a href="/Ugovor/ProduziUslugu?id=@x.Id" class="btn btn-success">Produženje</a>
+                    }
+                    @if (@x.HostingPaketiId != null || @x.VpsPaketiId != null || @x.DedicatedPaketiId != null && @x.StatusId > 2)
+                    {
+                        if (@x.Username == null)
+                        {
+                            <a href="/Ugovor/DodajPristupnePodatke?id=@x.Id" class="btn btn-default glyphicon glyphicon-plus">Pristupni podaci</a>
+                        }
+                        else
+                        {
+                            <a href="/Ugovor/DodajPristupnePodatke?id=@x.Id" class="btn btn-default glyphicon glyphicon-pencil">Pristupni podaci</a>
+                        }
+                    }
+                </td>
+            </tr>
+        </form>
+    }
+</table>

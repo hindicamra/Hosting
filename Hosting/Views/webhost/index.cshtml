@@ -1,0 +1,70 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "Web hosting";
+    List<HostingPaketi> hpaketi = (List<HostingPaketi>)ViewData["hp"];
+}
+
+<br />
+
+<div class="row">
+    <div>
+        <div class="col-md-2">
+            <img src="~/slike/6.jpg" width="170" height="130" />
+        </div>
+
+        <div class="col-md-4">
+            <b>WEB TRANSFER</b> <br />
+            Želite preseliti Vašu web stranicu sa postojećeg hostinga na naš server? Bez brige, naš tim će izvršiti migraciju Vaših podataka sasvim beesplatno.
+        </div>
+
+    </div>
+
+    <div>
+        <div class="col-md-2">
+            <img src="~/slike/5.jpg" width="170" height="130" />
+        </div>
+
+        <div class="col-md-4">
+            <b>BESPLATNA DOMENA</b> <br />
+            Uz bilo koji web hosting paket iz naše ponude dobijate i besplatno jednu od slijecećih domena: .ba, .com, .net, .org, .info, .biz, .org.ba, .net.ba, .edu.ba, .gov.ba.
+        </div>
+    </div>
+</div>
+
+<br />
+<table class="table table-striped" style="background-color: rgb(248, 248, 248)">
+    <thead>
+    <th> </th>
+    <th>Prostor</th>
+    <th> <img src="~/slike/rsz_database.png" class="img-responsive" /> </th>
+    <th>E-mail adresa</th>
+    <th>Promet <img src="~/slike/rsz_promet.png" class="img-responsive" /> </th>
+    <th> <img src="~/slike/rsz_ip.png" class="img-responsive" /> </th>
+    <th> <img src="~/slike/rsz_ip.png" class="img-responsive" /> </th>
+    <th>Pod domena</th>
+    <th>Addon domena</th>
+    <th>Parked domena</th>
+    <th>FTP naloga</th>
+    <th>Cijena/Godišnje -KM</th>
+    </thead>
+
+    @foreach (HostingPaketi x in hpaketi)
+    {
+        <tr>
+            <td>@x.NazivPaketa</td>
+            <td>@x.Prostor</td>
+            <td>@x.Baza</td>
+            <td>@x.EmailAdresa</td>
+            <td>@x.Promet</td>
+            <td>@x.IPv4</td>
+            <td>@x.IPv6</td>
+            <td>@x.PodDomena</td>
+            <td>@x.AddonDomene</td>
+            <td>@x.ParkedDomene</td>
+            <td>@x.FTPNaloga</td>
+            <td>@x.Cijena</td>
+            <td> <a href="/Narudzbe/hostingkupi?hid=@x.Id" class="btn btn-default">Kupi</a> </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,19 @@
+﻿@using DataAccessLayer.Klase
+
+@{
+    ViewBag.Title = "SSL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int sslid = (int)ViewData["sslid"];
+}
+
+<br />
+<form action="/Klijent/Lice">
+    <div class="form-inline">
+        <label>SSL za domenu:</label>
+        <input type="text" name="Domena" class="form-control" placeholder="SSL za domenu" />
+        <input type="hidden" name="sslid" class="form-control" value="@sslid" hidden="True" />
+
+        <input type="submit" value="Snimi" class="btn btn-default" />
+    </div>
+
+</form>

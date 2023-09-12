@@ -1,0 +1,125 @@
+﻿@using System
+@using DataAccessLayer
+@using DataAccessLayer.Klase
+
+@{
+    var user = Session["user"] as Klijenti;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Hosting</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    @if (user != null)
+    {
+        <div class="navbar navbar-fixed-top navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink(" ", "KlijentPanel", "Klijent", new { area = "" }, new { @class = "navbar-brand glyphicon glyphicon-home" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            @{
+                                mssql s = new mssql();
+                                int br = s.Tiketi.Count(x => x.Zavrsen == false && x.KlijentiId == user.Id);
+                                int brOdg = s.Tiketi.Count(x => x.Zavrsen == false && x.KlijentiId == user.Id && x.Odgovoreno == true);
+                                if (br > 0)
+                                {
+                                    if (brOdg > 0)
+                                    {
+                                        @Html.ActionLink(" Otvoreni tiket", "PregledKlijent", "tiket", new { area = "" }, new { @class = "glyphicon glyphicon-send", @style = "color: red" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink(" ", "PregledKlijent", "tiket", new { area = "" }, new { @class = "glyphicon glyphicon-send", @style = "color: green" })
+                                    }
+                                }
+                                else
+                                {
+                                    if (brOdg > 0)
+                                    {
+                                        @Html.ActionLink(" Otvoreni tiket", "PregledKlijent", "tiket", new { area = "" }, new { @class = "glyphicon glyphicon-send", @style = "color: red" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink(" Otvoreni tiket", "PregledKlijent", "tiket", new { area = "" }, new { @class = "glyphicon glyphicon-send", @style = "color: green" })
+                                    }
+                                }
+                            }
+                        </li>
+                        <li> @Html.ActionLink("Novi tiket", "Novi", "tiket", new { area = "" }, new { @class = "navbar-brand" }) </li>
+                        <li> @Html.ActionLink("Logovi", "LogPregled", "Klijent", new { area = "" }, new { @class = "navbar-brand" }) </li>
+                    </ul>
+                    <ul class="navbar-brand  pull-right">
+                        @Html.ActionLink(@user.Ime+" "+@user.Prezime, "PromjenaPassworda", "Klijent", null, null)
+                        @Html.ActionLink(" ", "Logout", "Klijent", null, new { @class = "glyphicon glyphicon-log-out", @style = "color: red" })
+                    </ul>
+                </div>
+            </div>
+            <div style="height: 4px; background-color: rgb(37, 171, 226)"></div>
+        </div>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <div style="height: 8px; background-color: rgb(37, 171, 226)"></div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <p>&copy; @DateTime.Now.Year - Hosting</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>Powered by ASP.NET MVC & MSSQL</p>
+                    </div>
+                </div>
+            </footer>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <b>Adresa :</b> <br />
+                    000 Adresa 00 0000, Donji Vakuf,<br /> Bosna i Hercegovina <br /> <br />
+
+                    Banka: ImeBanke <br />
+                    Žiro račun: 0000 0000 0000 0000
+                </div>
+
+                <div class="col-md-3">
+                    <b>Kontakt:</b> <br />
+                    Tel. +387 00 000-000 <br />
+                    Fax. +387 00 000-000 <br />
+                    Prodaja: <a href="mailto:prodaja@hosty.ba" style="text-decoration: none;">prodaja@hosty.ba</a> <br />
+                    Info: <a href="mailto:prodaja@hosty.ba" style="text-decoration: none;">info@hosty.ba</a> <br />
+                    Zloupotrebe: <a href="mailto:prodaja@hosty.ba" style="text-decoration: none;">abouse@hosty.ba</a>
+                </div>
+
+                <div class="col-md-3">
+                    <b>UVJETI I PRAVILA:</b> <br />
+
+                    <a href="/uvjeti" style="color: black; text-decoration: none">> Uvjeti korištenja</a> <br />
+                    <a href="/osobnipodaci" style="color: black; text-decoration: none">> Osobni podaci</a>
+                </div>
+            </div>
+
+        </div>
+        <script src="~/scripts/jquery-3.1.1.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+                                }
+                                else
+                                {
+                                    Response.Redirect("/Klijent/Login");
+                                }
+</body>
+</html>
